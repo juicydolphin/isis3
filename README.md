@@ -6,4 +6,4 @@
 <code>docker-compose up -d</code>
 
 Перейти по локальной ссылке:
-<code>http://localhost:3000/</code>
+<code>http://localhost:3000/api-docs</code>
