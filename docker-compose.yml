@@ -1,26 +1,29 @@
-version: '1'
+version: "3.8"
 
 services:
   db:
     image: postgres
     restart: always
     environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: postgres
+      POSTGRES_DB: rules-editor
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - "5432:5432"
+
 
   app:
     build: .
     restart: always
-    environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: mydatabase
     depends_on:
       - db
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: admin
+      PGDATABASE: rules-editor
+      PGHOST: db
+      PGPORT: "5432"
     ports:
-      - '3000:3000'
+      - "3000:3000"
